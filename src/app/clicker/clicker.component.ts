@@ -9,22 +9,19 @@ import {Subscription} from "rxjs";
   templateUrl: './clicker.component.html',
   styleUrl: './clicker.component.scss'
 })
-export class ClickerComponent implements OnInit, OnDestroy {
+export class ClickerComponent implements OnDestroy {
 
   clickValue: number = 1;
   private gameSaveSubscription!: Subscription;
 
   constructor(private gameService: GameService) {
+    this.gameSaveSubscription = this.gameService.gameSave.subscribe(v => {
+      this.clickValue = v.clickValue;
+    });
   }
 
   onButtonClick() {
     this.gameService.clicks = this.clickValue;
-  }
-
-  ngOnInit() {
-    this.gameSaveSubscription = this.gameService.gameSave.subscribe(v => {
-      this.clickValue = v.clickValue;
-    });
   }
 
   ngOnDestroy(): void {
