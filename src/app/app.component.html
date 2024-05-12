@@ -2,152 +2,25 @@
   Clicka, the best game to waste your time playing.
 </header>
 
-<button disabled>A Win7-styled button</button>
-<input type="text" placeholder="Press Enter" aria-describedby="balloon-password">
-<div role="tooltip" id="balloon-password" hidden="">Press Backspace to dismiss</div>
+<hr>
 
-<input type="checkbox" id="example1">
-<label for="example1">This is a checkbox</label>
+<main class="grid grid-cols-[minmax(400px,_1fr)_minmax(1000px,_1fr)_minmax(400px,_1fr)] gap-4 justify-between pt-4">
+  <section>
+    <app-upgrade></app-upgrade>
+  </section>
 
-<details>
-  <summary>Expand me to see something interesting</summary>
-  <p>🎉 Tadah!</p>
-</details>
+  <section class="flex justify-center items-center mb-48">
+    <app-clicker></app-clicker>
+  </section>
 
-<select>
-  <option>5 - Incredible!</option>
-  <option>4 - Great!</option>
-  <option selected>3 - Pretty good</option>
-  <option>2 - Not so great</option>
-  <option>1 - Unfortunate</option>
-</select>
+  <section class="flex gap-4 flex-col">
+    <app-statistic></app-statistic>
+    <app-achievement></app-achievement>
+  </section>
+</main>
 
-<fieldset>
-  <div class="field-row">Select one:</div>
-  <div class="field-row">
-    <input id="radio5" type="radio" name="fieldset-example">
-    <label for="radio5">Diners</label>
-  </div>
-  <div class="field-row">
-    <input id="radio6" type="radio" name="fieldset-example">
-    <label for="radio6">Drive-Ins</label>
-  </div>
-  <div class="field-row">
-    <input id="radio7" type="radio" name="fieldset-example">
-    <label for="radio7">Dives</label>
-  </div>
-</fieldset>
-
-<ul role="menu" class="can-hover" style="width: 200px">
-  <li role="menuitem" tabindex="0" aria-haspopup="true">View</li>
-  <li role="menuitem" tabindex="0" aria-haspopup="true">
-    Sort by
-    <ul role="menu">
-      <li role="menuitem"><a href="#menu">Name</a></li>
-      <li role="menuitem"><a href="#menu">Size</a></li>
-      <li role="menuitem"><a href="#menu">Item type</a></li>
-      <li role="menuitem"><a href="#menu">Date modified</a></li>
-    </ul>
-  </li>
-  <li role="menuitem" class="has-divider"><a href="#menu">Refresh</a></li>
-  <li role="menuitem" aria-disabled="true"><a href="#menu">Paste</a></li>
-  <li role="menuitem" aria-disabled="true" class="has-divider">
-    <a href="#menu">Paste shortcut</a>
-  </li>
-  <li role="menuitem">
-    <img src="https://img.icons8.com/color/18/000000/monitor--v1.png"/>
-    <a href="#menu">Screen resolution</a>
-  </li>
-  <li role="menuitem">
-    <img src="https://img.icons8.com/color/18/000000/virtual-machine2.png"/>
-    <a href="#menu">Gadgets</a>
-  </li>
-  <li role="menuitem">
-    <img src="https://img.icons8.com/color/18/000000/remote-desktop.png"/>
-    <a href="#menu">Personalize</a>
-  </li>
-</ul>
-
-<ul role="menu" style="width: 200px">
-  <li role="menuitem">
-    <input type="radio" name="icon-size" id="example12">
-    <label for="example12">Large icons</label>
-  </li>
-  <li role="menuitem">
-    <input type="radio" name="icon-size" id="example13" checked>
-    <label for="example13">Medium icons</label>
-  </li>
-  <li role="menuitem" class="has-divider">
-    <input type="radio" name="icon-size" id="example14">
-    <label for="example14">Small icons</label>
-  </li>
-  <li role="menuitem">
-    <input type="checkbox" id="example15">
-    <label for="example15">Auto arrange icons</label>
-  </li>
-  <li role="menuitem">
-    <input type="checkbox" id="example16" checked>
-    <label for="example16">Align icons to grid</label>
-  </li>
-</ul>
-
-<div role="progressbar" class="animate">
-  <div style="width: 60%"></div>
-</div>
-
-<div class="has-scrollbar" style="width: 300px; height: 150px; overflow: auto">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh massa, viverra non velit vitae,
-  scelerisque venenatis risus. Sed posuere risus tellus, sit amet vehicula nunc venenatis ut.
-  Nunc convallis augue eget odio imperdiet, eu consequat massa fringilla consectetur eleifend.
-  Curabitur in egestas justo, vel fermentum ante. Lorem ipsum dolor sit amet, consectetur elit.
-  Cras ullamcorper non nibh et placerat. Nullam ornare lectus eget consequat dignissim.
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh massa, viverra non velit vitae,
-  scelerisque venenatis risus. Sed posuere risus tellus, sit amet vehicula nunc venenatis ut.
-  Nunc convallis augue eget odio imperdiet, eu consequat massa fringilla consectetur eleifend.
-  Curabitur in egestas justo, vel fermentum ante. Lorem ipsum dolor sit amet, consectetur elit.
-  Cras ullamcorper non nibh et placerat. Nullam ornare lectus eget consequat dignissim.
-</div>
-
-<input type="search" placeholder="Search" />
-
-<div class="field-row" style="max-width: 300px">
-  <label>Volume:</label>
-  <label>Low</label>
-  <input type="range" min="1" max="11" value="5" />
-  <label>High</label>
-</div>
-
-<span class="loader animate" aria-label="Processing your request"></span>
-
-<section class="tabs">
-  <menu role="tablist" aria-label="Tabs Template">
-    <button role="tab" aria-controls="tab-A" aria-selected="true">Tab A</button>
-    <button role="tab" aria-controls="tab-B" aria-selected="false">Tab B</button>
-    <button role="tab" aria-controls="tab-C" aria-selected="false">Tab C</button>
-    <button role="tab" aria-controls="tab-D" disabled="" aria-selected="false">Tab D</button>
-  </menu>
-  <article role="tabpanel" id="tab-A" hidden="true">Tab A is active</article>
-  <article role="tabpanel" id="tab-B" hidden="true">Tab B is active</article>
-  <article role="tabpanel" id="tab-C">Tab C is active</article>
-  <article role="tabpanel" id="tab-D" hidden="true">Tab D is inactive</article>
-</section>
-
-<a href="#dialog-demo">Open Dialog</a>
-
-<div class="window active is-bright" id="dialog-demo" role="dialog" aria-labelledby="dialog-title">
-  <div class="title-bar">
-    <div class="title-bar-text" id="dialog-title">Problem Diagnostics</div>
-    <div class="title-bar-controls">
-      <button aria-label="Close" onclick="history.back()"></button>
-    </div>
-  </div>
-  <div class="window-body has-space">
-    <h2 class="instruction instruction-primary">Identifying your problem...</h2>
-    <div role="progressbar" class="marquee"></div>
-  </div>
-  <footer style="text-align: right">
-    <button onclick="history.back()">Cancel</button>
-  </footer>
-</div>
+<footer>
+  <a href="https://github.com/jonasfroeller/clicka">Github</a>
+</footer>
 
 <router-outlet />

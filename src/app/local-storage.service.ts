@@ -28,6 +28,8 @@ export class LocalStorageService {
 
   private isLocalStorageSupported(): boolean {
     try {
+      if (!window) return false;
+
       const testKey = 'testKey';
       localStorage.setItem(testKey, testKey);
       localStorage.getItem(testKey);
