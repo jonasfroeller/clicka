@@ -3,35 +3,7 @@
 <article class="mt-4">
   <details>
     <summary>
-      Hobbylosa
-
-      <a href="#dialog-demo">
-        <button type="button">Buy menu</button>
-      </a>
-
-      <div aria-labelledby="dialog-title" class="window active is-bright" id="dialog-demo" role="dialog">
-        <div class="title-bar">
-          <div class="title-bar-text" id="dialog-title">Problem Diagnostics</div>
-          <div class="title-bar-controls">
-            <button aria-label="Close" onclick="history.back()"></button>
-          </div>
-        </div>
-        <div class="window-body has-space">
-          <h2 class="instruction instruction-primary">Identifying your problem...</h2>
-          <div class="marquee" role="progressbar"></div>
-
-          <div class="field-row" style="max-width: 300px">
-            <label>Amount:</label>
-            <label>Low</label>
-            <input max="11" min="1" type="range" value="5"/>
-            <label>High</label>
-          </div>
-        </div>
-        <footer class="flex gap-2 justify-end">
-          <button>Buy</button>
-          <button onclick="history.back()">Cancel</button>
-        </footer>
-      </div>
+      Hobbylosa <button type="button" (click)="onButtonClick()">buy one</button>
     </summary>
     <div class="has-scrollbar overflow-auto" style="max-height: 100px;">
       Bissl mehr click powa.

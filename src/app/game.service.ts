@@ -32,12 +32,13 @@ export class GameService {
     this.saveGame();
   }
 
-  private set clickValue(amount: number) {
+  set clickValue(amount: number) {
     if (!this.#gameSave) return;
 
     console.log("incrementing clickValue by ", amount);
-    this.#gameSave.clickValue = amount;
+    this.#gameSave.clickValue += amount;
     this.gameSave.next(this.#gameSave);
+    this.saveGame();
   }
 
   saveGame() {

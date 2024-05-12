@@ -1,8 +1,37 @@
-<header>
+<header class="flex justify-between pb-2">
   Clicka, the best game to waste your time playing.
+
+  <div>
+    <a href="#settings-dialog">
+      <button type="button">Settings</button>
+    </a>
+
+    <div aria-labelledby="dialog-title" class="window active is-bright" id="settings-dialog" role="dialog">
+      <div class="title-bar">
+        <div class="title-bar-text" id="dialog-title">Settings</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" onclick="history.back()"></button>
+        </div>
+      </div>
+      <div class="window-body has-space">
+        <h2 class="instruction instruction-primary">Music</h2>
+
+        <div class="field-row" style="max-width: 300px">
+          <label>quieter</label>
+          <input max="10" min="1" type="range" value="2"/>
+          <label>louder</label>
+        </div>
+      </div>
+      <footer class="flex gap-2 justify-end">
+        <button onclick="history.back()">Cancel</button>
+      </footer>
+    </div>
+  </div>
 </header>
 
 <hr>
+
+<!--<div class="marquee" role="progressbar"></div>-->
 
 <main class="grid grid-cols-[minmax(400px,_1fr)_minmax(1000px,_1fr)_minmax(400px,_1fr)] gap-4 justify-between pt-4">
   <section>
