@@ -1,25 +1,52 @@
 import {Injectable} from '@angular/core';
 import {LocalStorageService} from "./local-storage.service";
 import {GameSave} from "./types";
-import {Subject} from "rxjs";
+import {Subject, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  constructor(private localStorageService: LocalStorageService) { }
-
   #gameSaveKey = 'clicka-save';
   #gameSave: GameSave | null = null;
-  private _clicks = new Subject<number>();
-  private _clickValue = new Subject<number>();
+
+  constructor(private localStorageService: LocalStorageService) {
+    this.gameSave.pipe(tap(val => console.log("game save was updated to ", val))).subscribe(v => {
+      this.#gameSave = v;
+    });
+  }
+
+  private _gameSave = new Subject<GameSave>();
+
+  get gameSave(): Subject<GameSave> {
+    return this._gameSave;
+  }
+
+  set clicks(amount: number) {
+    if (!this.#gameSave) return;
+
+    console.log("incrementing clicks by ", amount);
+    this.#gameSave.score += amount;
+    this.gameSave.next(this.#gameSave);
+    this.saveGame();
+  }
+
+  private set clickValue(amount: number) {
+    if (!this.#gameSave) return;
+
+    console.log("incrementing clickValue by ", amount);
+    this.#gameSave.clickValue = amount;
+    this.gameSave.next(this.#gameSave);
+  }
 
   saveGame() {
+    console.log("saving game to local storage");
     this.localStorageService.setItem(this.#gameSaveKey, this.#gameSave);
   }
 
   loadGame() {
+    console.log("loading game save from local storage");
     this.#gameSave = this.localStorageService.getItem(this.#gameSaveKey);
 
     if (!this.#gameSave) {
@@ -33,26 +60,11 @@ export class GameService {
         upgrades: []
       }
 
+      console.log("no game save found, creating new one");
+
       this.saveGame();
     }
 
-    this._clicks.next(this.#gameSave.score);
-    this._clickValue.next(this.#gameSave.clickValue);
-  }
-
-  get clickValue(): Subject<number> {
-    return this._clickValue;
-  }
-
-  private set clickValue(amount: number) {
-    this._clickValue.next(amount);
-  }
-
-  get clicks(): Subject<number> {
-    return this._clicks;
-  }
-
-  set clicks(amount: number) {
-    this._clicks.next(amount);
+    this.gameSave.next(this.#gameSave);
   }
 }

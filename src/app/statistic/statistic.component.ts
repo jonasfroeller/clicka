@@ -11,18 +11,19 @@ import {Subscription} from "rxjs";
 })
 export class StatisticComponent implements OnInit, OnDestroy {
 
-  constructor(private gameService: GameService) { }
-
-  private scoreSubscription!: Subscription;
   score: number = 0;
+  private gameSaveSubscription!: Subscription;
+
+  constructor(private gameService: GameService) {
+  }
 
   ngOnInit() {
-    this.scoreSubscription = this.gameService.clicks.subscribe(v => {
-      this.score += v;
+    this.gameSaveSubscription = this.gameService.gameSave.subscribe(v => {
+      this.score = v.score;
     });
   }
 
   ngOnDestroy(): void {
-    this.scoreSubscription.unsubscribe();
+    this.gameSaveSubscription.unsubscribe();
   }
 }

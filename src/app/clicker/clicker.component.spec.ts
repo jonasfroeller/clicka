@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ClickerComponent } from './clicker.component';
+import {ClickerComponent} from './clicker.component';
 
 describe('ClickerComponent', () => {
   let component: ClickerComponent;
@@ -10,8 +10,8 @@ describe('ClickerComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ClickerComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ClickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

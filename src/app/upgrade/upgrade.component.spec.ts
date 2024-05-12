@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UpgradeComponent } from './upgrade.component';
+import {UpgradeComponent} from './upgrade.component';
 
 describe('UpgradeComponent', () => {
   let component: UpgradeComponent;
@@ -10,8 +10,8 @@ describe('UpgradeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [UpgradeComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(UpgradeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

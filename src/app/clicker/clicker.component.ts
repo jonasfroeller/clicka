@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameService} from "../game.service";
-import {Subscription, tap} from "rxjs";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-clicker',
@@ -11,32 +11,23 @@ import {Subscription, tap} from "rxjs";
 })
 export class ClickerComponent implements OnInit, OnDestroy {
 
-  constructor(private gameService: GameService) { }
-
-  private clickValueSubscription!: Subscription;
   clickValue: number = 1;
-  private scoreSubscription!: Subscription;
-  score: number = 0;
+  private gameSaveSubscription!: Subscription;
+
+  constructor(private gameService: GameService) {
+  }
 
   onButtonClick() {
     this.gameService.clicks = this.clickValue;
-    this.gameService.saveGame();
   }
 
   ngOnInit() {
-    this.gameService.loadGame();
-
-    this.clickValueSubscription = this.gameService.clickValue.pipe(tap(val => console.log("clickValue", val))).subscribe(v => {
-      this.clickValue += v;
-    });
-
-    this.scoreSubscription = this.gameService.clicks.pipe(tap(val => console.log("clicks", val))).subscribe(v => {
-      this.score += v;
+    this.gameSaveSubscription = this.gameService.gameSave.subscribe(v => {
+      this.clickValue = v.clickValue;
     });
   }
 
   ngOnDestroy(): void {
-    this.clickValueSubscription.unsubscribe();
-    this.scoreSubscription.unsubscribe();
+    this.gameSaveSubscription.unsubscribe();
   }
 }
