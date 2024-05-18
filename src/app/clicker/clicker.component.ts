@@ -12,11 +12,13 @@ import {Subscription} from "rxjs";
 export class ClickerComponent implements OnDestroy {
 
   clickValue: number = 1;
+  totalYieldPerSecond: number = 0;
   private gameSaveSubscription!: Subscription;
 
   constructor(private gameService: GameService) {
     this.gameSaveSubscription = this.gameService.gameSave.subscribe(v => {
       this.clickValue = v.clickValue;
+      this.totalYieldPerSecond = v.totalYieldPerSecond;
     });
   }
 

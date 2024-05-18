@@ -1,0 +1,12 @@
+<h2>Games</h2><br>
+
+<select [(ngModel)]="selectedSaveKey" class="mt-4">
+  <option selected value="clicka-save:-1">default</option>
+  <option *ngFor="let key of Object.keys(saves)" [value]="key">
+    {{ key }}
+  </option>
+</select>
+
+<button (click)="loadGame()" class="btn btn-primary mt-4" type="button">
+  load game
+</button>

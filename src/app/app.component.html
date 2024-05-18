@@ -1,5 +1,5 @@
 <header class="flex justify-between pb-2">
-  Clicka, the best game to waste your time playing.
+  <h1>Clicka, the best game to waste your time playing.</h1>
 
   <div>
     <a href="#settings-dialog">
@@ -16,6 +16,12 @@
       <div class="window-body has-space">
         <h2 class="instruction instruction-primary">Music</h2>
 
+        <iframe #spotifyIframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                allowfullscreen=""
+                frameBorder="0" height="352" loading="lazy" src="https://open.spotify.com/embed/playlist/4gu9BaJL1rTOJYt0MdZp3a?utm_source=generator"
+                style="border-radius:12px"
+                width="100%">
+        </iframe>
         <div class="field-row" style="max-width: 300px">
           <label>quieter</label>
           <input max="10" min="1" type="range" value="2"/>
@@ -44,6 +50,9 @@
 
   <section class="flex gap-4 flex-col">
     <app-statistic></app-statistic>
+    <hr>
+    <app-game-loader></app-game-loader>
+    <hr>
     <app-achievement></app-achievement>
   </section>
 </main>
