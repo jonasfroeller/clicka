@@ -29,3 +29,5 @@ export class GameLoaderComponent implements OnInit {
     this.gameService.loadGameByKey(this.selectedSaveKey);
   }
 }
+
+// TODO: create new game functionality

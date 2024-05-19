@@ -6,13 +6,15 @@
   <details *ngFor="let upgrade of filteredUpgrades; index as i;">
     <summary>
       {{ upgrade.name }}
-      <button (click)="onClick(upgrade.onBuy)" [disabled]="score - nextPrice < 0" type="button">buy one
-        for {{ nextPrice }}
+      <button (click)="onClick(upgrade.onBuy, upgrade)"
+              [disabled]="score - (!upgrade.yieldPerSecond ? nextPrice : upgrade.nextPrice) < 0" type="button">buy one
+        for {{ !upgrade.yieldPerSecond ? nextPrice : upgrade.nextPrice }}
+        <!-- TODO: replace with correct changed price -->
       </button>
     </summary>
     <div class="has-scrollbar overflow-auto" style="max-height: 100px;">
       {{ upgrade.description }} <br>
-      This upgrade produces {{ upgrade.yieldPerSecond }}/s. And Increases click value by {{ clickValueIncrement }}.
+      This upgrade produces {{ upgrade.yieldPerSecond ?? 0 }}/s. <span *ngIf="!upgrade.yieldPerSecond">And Increases click value by {{ clickValueIncrement }}</span>.
     </div>
   </details>
 </article>

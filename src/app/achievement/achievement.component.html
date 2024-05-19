@@ -1,7 +1,25 @@
 <h2>Achievements</h2><br>
 
-no achievements yet, work in progress...
+@for (achievement of achievements; track achievement.name) {
+  <div class="border border-gray-400">
+    <p>{{ achievement.name }}</p>
+    <p>{{ achievement.description }}</p>
+    <p>{{ dateFormatter.format(stringToDate(achievement.receivedAt.toString())) }}</p>
+  </div>
+} @empty {
+  no achievements reached yet...
+}
 
-<div class="animate" role="progressbar">
-  <div style="width: 10%;"></div>
-</div>
+@if (missingAchievements.length > 0) {
+  <div class="overflow-auto max-h-24">
+    @for (achievement of missingAchievements; track achievement.name) {
+      <div class="border border-gray-400">
+        <p>{{ achievement.name }}</p>
+        <p>{{ achievement.description }}</p>
+        @if (achievement.hasProgress) {
+          <app-achievement-progress [achievement]="achievement"></app-achievement-progress>
+        }
+      </div>
+    }
+  </div>
+}

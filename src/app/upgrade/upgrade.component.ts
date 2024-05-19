@@ -3,7 +3,7 @@ import {Subscription} from "rxjs";
 import {GameService} from "../game.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {upgrades} from "../upgrades";
-import {UpgradeActions} from "../types";
+import {BoughtUpgrade, UpgradeActions} from "../types";
 
 @Component({
   selector: 'app-upgrade',
@@ -41,21 +41,32 @@ export class UpgradeComponent implements OnDestroy {
     this.loading = false;
   }
 
-  onClick(functionName: string) {
+  onClick(functionName: string, upgrade: UpgradeActions) {
     // @ts-ignore
-    this[functionName]();
+    this[functionName](upgrade);
   }
 
-  buyClickValueUpgrade() {
+  buyClickValueUpgrade(upgrade: UpgradeActions) {
     this.gameService.buyClickValueUpgrade();
+  }
+
+  buyUpgrade(upgrade: UpgradeActions) {
+    const boughtUpgrade: BoughtUpgrade = {
+      name: upgrade.name,
+      description: upgrade.description,
+      nextPrice: upgrade.nextPrice,
+      yieldPerSecond: upgrade.yieldPerSecond,
+      amount: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    this.gameService.buyUpgrade(boughtUpgrade);
   }
 
   ngOnDestroy(): void {
     this.gameSaveSubscription.unsubscribe();
   }
 
-  // TODO:
-  // Use an interval for upgrades that generate resources over time. Start the
-  // Observable only as soon as the first upgrade is acquired.
-  // TODO: show amount of upgrade, yieldPerSecond
+  // TODO: show amount of upgrade
 }

@@ -1,7 +1,8 @@
+// Upgrades
 export interface Upgrade {
   name: string;
   description: string;
-  yieldPerSecond: number;
+  yieldPerSecond: number | null;
   nextPrice: number;
 }
 
@@ -15,12 +16,25 @@ export interface BoughtUpgrade extends Upgrade {
   updatedAt: Date;
 }
 
+// Achievements
 export type Achievement = {
   name: string;
   description: string;
+}
+
+export interface ReceivedAchievement extends Achievement {
   receivedAt: Date
 }
 
+export interface ReceiveAchievement extends Achievement {
+  hasProgress: boolean;
+  condition: (params: GameSave) => {
+    isAchieved: boolean;
+    progress: number | null; // 0 - 1
+  };
+}
+
+// Game Progress
 export type GameSave = {
   name: string;
   description: string;
@@ -30,6 +44,6 @@ export type GameSave = {
   clickValueIncrementor: number;
   totalYieldPerSecond: number;
   date: Date;
-  achievements: Achievement[] | [];
-  upgrades: Upgrade[] | [];
+  achievements: ReceivedAchievement[] | [];
+  upgrades: BoughtUpgrade[] | [];
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, PLATFORM_ID, signal, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {UpgradeComponent} from "./upgrade/upgrade.component";
 import {ClickerComponent} from "./clicker/clicker.component";
@@ -6,6 +6,7 @@ import {AchievementComponent} from "./achievement/achievement.component";
 import {StatisticComponent} from "./statistic/statistic.component";
 import {GameService} from "./game.service";
 import {GameLoaderComponent} from "./game-loader/game-loader.component";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,10 @@ import {GameLoaderComponent} from "./game-loader/game-loader.component";
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'clicka';
   @ViewChild('spotifyIframe') spotifyIframe: any;
+  isBrowser = signal(false);
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, @Inject(PLATFORM_ID) platformId: object) {
+    this.isBrowser.set(isPlatformBrowser(platformId));
   }
 
   ngOnInit() {
@@ -35,7 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       const handleClick = () => {
         console.log("First interaction registered");
 
-        this.spotifyIframe.nativeElement.contentWindow.postMessage({command: 'toggle'}, '*');
+        // this.spotifyIframe.nativeElement.contentWindow.postMessage({command: 'toggle'}, '*');
         document.removeEventListener('click', handleClick);
       };
 
@@ -43,5 +46,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     this.spotifyIframe.nativeElement.addEventListener('load', playMusic);
+
+    if (this.isBrowser()) {
+      this.gameService.gameLoop();
+    }
   }
 }
