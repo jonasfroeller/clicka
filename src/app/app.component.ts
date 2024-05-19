@@ -7,11 +7,12 @@ import {StatisticComponent} from "./statistic/statistic.component";
 import {GameService} from "./game.service";
 import {GameLoaderComponent} from "./game-loader/game-loader.component";
 import {isPlatformBrowser} from "@angular/common";
+import {DraggableDirective} from "./draggable.directive";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UpgradeComponent, ClickerComponent, AchievementComponent, StatisticComponent, GameLoaderComponent],
+  imports: [RouterOutlet, UpgradeComponent, ClickerComponent, AchievementComponent, StatisticComponent, GameLoaderComponent, DraggableDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
