@@ -11,6 +11,8 @@
 }
 
 @if (missingAchievements.length > 0) {
+  <h3 class="mt-4">missing Achievements</h3><br>
+
   <div class="overflow-auto max-h-24">
     @for (achievement of missingAchievements; track achievement.name) {
       <div class="border border-gray-400">
