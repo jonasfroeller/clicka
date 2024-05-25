@@ -136,6 +136,10 @@ export class GameService {
     this.gameSave.next(this.#gameSave!);
   }
 
+  deleteGame() {
+    this.localStorageService.removeItem(this.#gameSaveKey);
+  }
+
   createNewGameIfNonePresent() {
     if (!this.#gameSave) {
       this.#gameSave = {
