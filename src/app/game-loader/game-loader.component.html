@@ -10,3 +10,13 @@
 <button (click)="loadGame()" class="btn btn-primary mt-4" type="button">
   load game
 </button>
+<button (click)="deleteGame()" class="btn btn-primary mt-4" type="button">
+  delete game
+</button>
+
+<hr>
+
+<input [(ngModel)]="newGameName" type="text">
+<button (click)="createGame()" class="btn btn-primary mt-4" type="button">
+  new game
+</button>

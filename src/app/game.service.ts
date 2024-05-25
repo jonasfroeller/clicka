@@ -88,7 +88,7 @@ export class GameService {
     if (this.#gameSave && this.#gameSave.achievements) {
       for (const achievement of achievements) {
         if (achievement.condition(this.#gameSave).isAchieved) {
-          console.log(`achievement ${achievement.name} was reached`);
+          // console.log(`achievement ${achievement.name} was reached`);
           const achievementReached: ReceivedAchievement = {
             receivedAt: new Date(),
             name: achievement.name,
@@ -108,6 +108,11 @@ export class GameService {
         return acc + (upgrade.yieldPerSecond ?? 0);
       }, 0);
     }
+  }
+
+  setGameToLoad(key: string) {
+    this.#gameSaveKey = key;
+    this.localStorageService.setItem("clicka-state:game-to-load-on-reload", key);
   }
 
   saveGame() {
@@ -138,6 +143,29 @@ export class GameService {
 
   deleteGame() {
     this.localStorageService.removeItem(this.#gameSaveKey);
+  }
+
+  deleteGameByKey(key: string) {
+    this.localStorageService.removeItem(key);
+  }
+
+  createNewGame(name: string, description: string = "", score: number = 0, clickValue: number = 1, totalYieldPerSecond: number = 0, clickValueIncrementor: number = 0.1, nextPrice: number = 10, date: Date = new Date(), achievements: ReceivedAchievement[] = [], upgrades: BoughtUpgrade[] = []) {
+    this.#gameSaveKey = "clicka-save:" + name.trim();
+    this.#gameSave = {
+      name: name,
+      description: description,
+      score: score,
+      clickValue: clickValue,
+      totalYieldPerSecond: totalYieldPerSecond,
+      clickValueIncrementor: clickValueIncrementor,
+      nextPrice: nextPrice,
+      date: date,
+      achievements: achievements,
+      upgrades: upgrades
+    };
+
+    this.gameSave.next(this.#gameSave!);
+    this.saveGame();
   }
 
   createNewGameIfNonePresent() {
