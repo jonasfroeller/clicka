@@ -1,5 +1,5 @@
-import { Directive, ElementRef, HostListener, Inject, PLATFORM_ID, signal } from '@angular/core';
-import { isPlatformBrowser } from "@angular/common";
+import {Directive, ElementRef, HostListener, Inject, PLATFORM_ID, signal} from '@angular/core';
+import {isPlatformBrowser} from "@angular/common";
 
 @Directive({
   selector: '[appDraggable]',

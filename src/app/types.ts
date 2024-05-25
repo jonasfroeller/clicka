@@ -4,6 +4,7 @@ export interface Upgrade {
   description: string;
   yieldPerSecond: number | null;
   nextPrice: number;
+  amount: number;
 }
 
 export interface UpgradeActions extends Upgrade {
@@ -11,7 +12,6 @@ export interface UpgradeActions extends Upgrade {
 }
 
 export interface BoughtUpgrade extends Upgrade {
-  amount: number;
   createdAt: Date;
   updatedAt: Date;
 }

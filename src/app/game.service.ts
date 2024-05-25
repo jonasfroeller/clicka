@@ -14,7 +14,7 @@ export class GameService {
   #gameSave: GameSave | null = null;
 
   constructor(private localStorageService: LocalStorageService) {
-    this.gameSave.pipe(tap(val => console.log("game save was updated to ", val))).subscribe(v => {
+    this.gameSave.pipe(tap(val => console.log("game save was updated to ", val.score))).subscribe(v => {
       this.#gameSave = v;
     });
   }

@@ -27,12 +27,10 @@ export class AchievementProgressComponent implements OnInit, OnDestroy, OnChange
   }
 
   ngOnInit(): void {
-    console.log("init achievement progress component", this.achievement, this.gameSave);
     this.updateProgress();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("achievement or gamesave changed", changes);
+  ngOnChanges(_changes: SimpleChanges): void {
     this.updateProgress();
   }
 
@@ -41,17 +39,11 @@ export class AchievementProgressComponent implements OnInit, OnDestroy, OnChange
   }
 
   private updateProgress(): void {
-    console.log(this.achievement)
-
     if (this.achievement && this.gameSave) {
       // @ts-ignore
       this.progress = this.achievement.condition(this.gameSave).progress * 100;
     } else {
       this.progress = 0;
     }
-
-    console.log(this.progress)
   }
 }
-
-// TODO: fix me

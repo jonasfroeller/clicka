@@ -20,6 +20,7 @@ export class UpgradeComponent implements OnDestroy {
   nextPrice: number = 10;
   score: number = 0;
   clickValueIncrement: number = 1;
+  updatedAt: string | number = -1;
 
   filteredUpgrades: UpgradeActions[] = upgrades;
   loading = false;
@@ -31,6 +32,50 @@ export class UpgradeComponent implements OnDestroy {
       this.clickValueIncrement = v.clickValueIncrementor * this.clickValue;
       this.nextPrice = v.nextPrice;
       this.score = v.score;
+
+      let upgradesDidChange = true;
+      if (this.updatedAt !== -1) {
+        upgradesDidChange = (v.upgrades
+          .filter(upgrade => !(upgrade.yieldPerSecond === null || upgrade.yieldPerSecond === 0))
+          .filter(upgrade =>
+            upgrades.some(() => {
+              // console.log((new Date(JSON.parse(JSON.stringify(upgrade.updatedAt)))).getTime(), (new Date(JSON.parse(this.updatedAt as string))).getTime());
+              return ((new Date(JSON.parse(JSON.stringify(upgrade.updatedAt)))).getTime() > (new Date(JSON.parse(this.updatedAt as string))).getTime())
+            })))
+          .length > 0
+      }
+
+      console.log("upgradesDidChange", upgradesDidChange);
+
+      if (upgradesDidChange) {
+        this.updatedAt = JSON.stringify(new Date());
+
+        this.filteredUpgrades = [
+          ...v.upgrades.map(upgrade => {
+            return {
+              name: upgrade.name,
+              onBuy: "buyUpgrade",
+              description: upgrade.description,
+              nextPrice: upgrade.nextPrice,
+              yieldPerSecond: upgrade.yieldPerSecond,
+              amount: upgrade.amount
+            };
+          }),
+          ...upgrades
+            .filter(upgrade => !v.upgrades.some(a => a.name === upgrade.name))
+            .map(upgrade => {
+                return {
+                  name: upgrade.name,
+                  onBuy: "buyUpgrade",
+                  description: upgrade.description,
+                  nextPrice: upgrade.nextPrice,
+                  yieldPerSecond: upgrade.yieldPerSecond,
+                  amount: upgrade.amount
+                };
+              }
+            )
+        ]
+      }
     });
   }
 
@@ -41,7 +86,9 @@ export class UpgradeComponent implements OnDestroy {
     this.loading = false;
   }
 
-  onClick(functionName: string, upgrade: UpgradeActions) {
+  onClick(functionName: string, upgrade: UpgradeActions, rootUpgrade = false) {
+    if (rootUpgrade) functionName = "buyClickValueUpgrade";
+
     // @ts-ignore
     this[functionName](upgrade);
   }
@@ -67,6 +114,4 @@ export class UpgradeComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.gameSaveSubscription.unsubscribe();
   }
-
-  // TODO: show amount of upgrade
 }

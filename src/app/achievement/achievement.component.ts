@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ReceiveAchievement, ReceivedAchievement} from "../types";
 import {Subscription} from "rxjs";
@@ -19,10 +19,9 @@ import {AchievementProgressComponent} from "../achievement-progress/achievement-
   templateUrl: './achievement.component.html',
   styleUrl: './achievement.component.scss'
 })
-export class AchievementComponent implements OnDestroy {
-
+export class AchievementComponent implements OnInit, OnDestroy {
   achievements: ReceivedAchievement[] = [];
-  missingAchievements: ReceiveAchievement[] = achievements;
+  missingAchievements: ReceiveAchievement[] = [];
   protected readonly dateFormatter = dateFormatter;
   private gameSaveSubscription!: Subscription;
 
@@ -32,8 +31,14 @@ export class AchievementComponent implements OnDestroy {
 
       this.missingAchievements = this.missingAchievements
         .filter(achievement =>
-          !this.achievements.some(a => a.name === achievement.name));
+          !this.achievements.some(a => a.name === achievement.name)
+        );
     });
+  }
+
+  ngOnInit(): void {
+    this.achievements = [];
+    this.missingAchievements = achievements;
   }
 
   ngOnDestroy(): void {
@@ -44,5 +49,3 @@ export class AchievementComponent implements OnDestroy {
     return new Date(string);
   }
 }
-
-// TODO: fix weird state error

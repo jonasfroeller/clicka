@@ -6,13 +6,15 @@ export let upgrades: UpgradeActions[] = [
     description: "Bissl mehr click powa.",
     yieldPerSecond: null,
     nextPrice: 10,
-    onBuy: "buyClickValueUpgrade"
+    onBuy: "buyClickValueUpgrade",
+    amount: 0
   },
   {
     name: "Entrepreneur",
     description: "Passives Einkommen.",
     yieldPerSecond: 1,
     nextPrice: 250,
-    onBuy: "buyUpgrade"
+    onBuy: "buyUpgrade",
+    amount: 0
   }
 ]
